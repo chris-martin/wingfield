@@ -1,8 +1,9 @@
 {-# LANGUAGE FunctionalDependencies #-}
 
 module Wingfield.Type
-  ( Set (..)
-  , View (..)
+  ( View (..)
+  , Set (..)
+  , Modify (..)
   ) where
 
 --------------------------------------------------------------------------------
@@ -29,6 +30,12 @@ example, we change the first field from 'Integer' to 'String', thus
 ("ab",'c')
 
 -}
-class Set whole whole' part optic | optic part whole -> whole'
+class Set whole whole' part' optic | optic whole part' -> whole'
   where
-    set :: optic -> part -> whole -> whole'
+    set :: optic -> part' -> whole -> whole'
+
+--------------------------------------------------------------------------------
+
+class Modify whole whole' part part' optic | optic whole part' -> part whole'
+  where
+    modify :: optic -> (part -> part') -> (whole -> whole')
