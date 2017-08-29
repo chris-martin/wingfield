@@ -1,0 +1,3 @@
+module Wingfield.Type
+  (
+  ) where
