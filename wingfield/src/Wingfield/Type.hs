@@ -8,7 +8,8 @@ module Wingfield.Type
 
 --------------------------------------------------------------------------------
 
-class View whole part optic | optic whole -> part
+class View whole part optic
+    | optic whole -> part
   where
     view :: optic -> whole -> part
 
@@ -30,12 +31,15 @@ example, we change the first field from 'Integer' to 'String', thus
 ("ab",'c')
 
 -}
-class Set whole whole' part' optic | optic whole part' -> whole'
+class Set whole whole' part' optic
+    | optic whole part' -> whole'
   where
     set :: optic -> part' -> whole -> whole'
 
 --------------------------------------------------------------------------------
 
-class Modify whole whole' part part' optic | optic whole part' -> part whole'
+class Modify whole whole' part part' optic
+    | optic whole -> part
+    , optic whole part' -> whole'
   where
     modify :: optic -> (part -> part') -> (whole -> whole')
